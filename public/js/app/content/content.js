@@ -1,0 +1,12 @@
+"use strict";
+var Content = (function () {
+    function Content(item, price, contentId) {
+        this.item = item;
+        this.price = price;
+        this.contentId = contentId;
+    }
+    return Content;
+}());
+exports.Content = Content;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbnRlbnQvY29udGVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUE7SUFLQyxpQkFBYSxJQUFZLEVBQUUsS0FBYSxFQUFFLFNBQWtCO1FBQzNELElBQUksQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDO1FBQ2pCLElBQUksQ0FBQyxLQUFLLEdBQUcsS0FBSyxDQUFDO1FBQ25CLElBQUksQ0FBQyxTQUFTLEdBQUcsU0FBUyxDQUFDO0lBQzVCLENBQUM7SUFDRixjQUFDO0FBQUQsQ0FWQSxBQVVDLElBQUE7QUFWWSxlQUFPLFVBVW5CLENBQUEiLCJmaWxlIjoiY29udGVudC9jb250ZW50LmpzIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNsYXNzIENvbnRlbnQge1xuXHRpdGVtOiBzdHJpbmc7XG5cdHByaWNlOiBudW1iZXI7XG5cdGNvbnRlbnRJZDogc3RyaW5nO1xuXG5cdGNvbnN0cnVjdG9yIChpdGVtOiBzdHJpbmcsIHByaWNlOiBudW1iZXIsIGNvbnRlbnRJZD86IHN0cmluZykge1xuXHRcdHRoaXMuaXRlbSA9IGl0ZW07XG5cdFx0dGhpcy5wcmljZSA9IHByaWNlO1xuXHRcdHRoaXMuY29udGVudElkID0gY29udGVudElkO1xuXHR9XG59Il0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9
