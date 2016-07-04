@@ -41,7 +41,7 @@ export class SigninComponent implements OnInit {
                 data => {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userId', data.userId);
-                    this._router.navigateByUrl('/');
+                    this._router.navigateByUrl('/content');
                 },
                 error => this._errorService.handleError(error)
             );

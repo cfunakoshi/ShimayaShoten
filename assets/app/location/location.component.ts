@@ -2,21 +2,29 @@ import {Component, OnInit} from "@angular/core";
 @Component({
 	selector: 'my-location',
 	template: `
-		<div class="container-fluid bg-grey">
-  			<h2>Location</h2>
+		<div class="container-fluid">
   			<div class="row">
-    			<div class="col-sm-5">
-      				<p><span class="glyphicon glyphicon-map-marker"></span>710 Kohou St, Honolulu, HI 96817</p>
-      				<p><span class="glyphicon glyphicon-phone"></span>(808)841-6611</p>
-      				<p><span class="glyphicon glyphicon-envelope"></span>shimayashoten@gmail.com</p> 
+    			<div class="col-md-8 col-md-offset-2">
+              <h2><u>Location</u></h2>
+              <br><br>
+      				<p><span class="glyphicon glyphicon-map-marker"></span> 710 Kohou St, Honolulu, HI 96817</p>
+      				<p><span class="glyphicon glyphicon-phone"></span> (808)841-6611</p>
+      				<div><a href="mailto:shimayashoten@gmail.com?Subject=Customer%20Inquiry" target="_top"><span class="glyphicon glyphicon-envelope"></span> shimayashoten@gmail.com </a></div>
+              <br> 
     			</div>
 			</div>
 		</div>
-		<div id="googleMap" style="height:400px;width:100%;"></div>	
+		<div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div id="googleMap" style="height:400px;width:100%;"></div>	
+      </div>
+    </div>
 	
 	`,
     styles: [`
-        
+        .container-fluid {
+          padding-top: 30px;
+        }
     `]
 })
 export class LocationComponent implements OnInit {

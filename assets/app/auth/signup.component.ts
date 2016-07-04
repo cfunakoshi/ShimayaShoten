@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, ControlGroup, Validators, Control } from "@angular/common";
+import { Router } from "@angular/router";
 
 import { User } from "./user";
 import { AuthService } from "./auth.service";
@@ -7,40 +8,47 @@ import { ErrorService } from "../errors/error.service";
 @Component({
     selector: 'my-signup',
     template: `
-        <section class="col-md-8 col-md-offset-2">
-            <form [ngFormModel]="myForm" (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input [ngFormControl]="myForm.find('firstName')" type="text" id="firstName" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input [ngFormControl]="myForm.find('lastName')" type="text" id="lastName" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="email">Mail</label>
-                    <input [ngFormControl]="myForm.find('email')" type="email" id="email" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input [ngFormControl]="myForm.find('password')" type="password" id="password" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Sign Up</button>
-            </form>
-        </section>
-    `
+            <div class="jumbotron" *ngIf="isLoggedIn()">
+                <h2 style="text-align: center;">Create a New User</h2>
+                <br>
+                <form [ngFormModel]="myForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input [ngFormControl]="myForm.find('firstName')" type="text" id="firstName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input [ngFormControl]="myForm.find('lastName')" type="text" id="lastName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Mail</label>
+                        <input [ngFormControl]="myForm.find('email')" type="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input [ngFormControl]="myForm.find('password')" type="password" id="password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Sign Up</button>
+                </form>
+            </div>
+    `,
+    styles: [`    
+    `]
 })
 export class SignupComponent implements OnInit {
     myForm: ControlGroup;
 
-    constructor(private _fb:FormBuilder, private _authService: AuthService, private _errorService: ErrorService) {}
+    constructor(private _router: Router, private _fb:FormBuilder, private _authService: AuthService, private _errorService: ErrorService) {}
 
     onSubmit() {
         const user = new User(this.myForm.value.email, this.myForm.value.password, this.myForm.value.firstName, this.myForm.value.lastName);
         console.log(user);
         this._authService.signup(user)
             .subscribe(
-                data => console.log(data),
+                data => {
+                    console.log(data);
+                    this._router.navigateByUrl('/');
+                },
                 error => this._errorService.handleError(error)
             )
     }
@@ -61,5 +69,9 @@ export class SignupComponent implements OnInit {
         if (!control.value.match("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")) {
             return {invalidMail: true};
         }
+    }
+
+    isLoggedIn() {
+        return this._authService.isLoggedIn();
     }
 }

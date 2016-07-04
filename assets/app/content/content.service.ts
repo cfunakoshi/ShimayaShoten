@@ -18,11 +18,30 @@ export class ContentService {
 				const data = response.json().obj;
 				let objs: any[] = [];
 				for (let i = 0; i < data.length; i++) {
-					let item = new Content(data[i].item, data[i].price, data[i]._id);
+					let item = new Content(data[i].item, data[i].price, data[i]._id, data[i].url);
 					objs.push(item);
 				};
 				return objs;
 			})
 			.catch(error => Observable.throw(error.json()));
 	}
+
+	addContent(content: Content) {
+		const body = JSON.stringify(content);
+		const headers = new Headers({'Content-type': 'application/json'});
+		return this._http.post('http://localhost:3000/content', body, {headers: headers})
+			.map(response => {
+				const data = response.json().obj;
+				let content = new Content(data.item, data.price, data._id, data.url);
+				return content;
+			}) 
+			.catch(error => Observable.throw(error.json()));
+	}
+
+	deleteContent(content: Content) {
+        this.items.splice(this.items.indexOf(content), 1);
+        return this._http.delete('http://localhost:3000/content/' + content.contentId)
+            .map(response => response.json())
+            .catch(error => Observable.throw(error.json()));
+    }
 }

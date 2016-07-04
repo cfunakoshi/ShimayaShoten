@@ -6,20 +6,19 @@ import {AuthService} from "./auth/auth.service";
     template: `
         <header class="row">
             <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="navbar-header">
-                        <a class="navbar-brand" [routerLink]="['./']">Test</a>
+                        <a class="navbar-brand" [routerLink]="['./']">Logo</a>
                     </div>
                      <ul class="nav navbar-nav">
                         <li><a [routerLink]="['./']">Home</a></li>
-                        <li><a [routerLink]="['./about']">About Us</a></li>
+                        <li><a [routerLink]="['./about/mission']">About Us</a></li>
                         <li><a [routerLink]="['./content']">Products</a></li>
                         <li><a [routerLink]="['./location']">Location</a></li>
-                        <li><a [routerLink]="['./message']">Message</a></li>
                      </ul>
                      <ul class="nav navbar-nav navbar-right">
-                        <li><a [routerLink]="['./auth']" *ngIf="!isLoggedIn()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        <li><a [routerLink]="['./auth']" *ngIf="isLoggedIn()"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
+                        <li><a [routerLink]="['./auth']" *ngIf="!isLoggedIn()"><span class="glyphicon glyphicon-log-in"></span> Admin Login</a></li>
+                        <li><a [routerLink]="['./auth/profile']" *ngIf="isLoggedIn()"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
                      </ul>
                 </div>
             </nav>
@@ -27,6 +26,12 @@ import {AuthService} from "./auth/auth.service";
     `,
     directives: [ROUTER_DIRECTIVES],
     styles: [`
+        * {
+            -webkit-border-radius: 0 !important;
+            -moz-border-radius: 0 !important;
+            border-radius: 0 !important;
+        }
+
         .navbar-brand {
            color: white;          
         }
