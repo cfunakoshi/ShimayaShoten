@@ -50,6 +50,15 @@ export class ContentComponent {
 	constructor(private _contentService: ContentService, private _authService: AuthService, private _errorService: ErrorService) {}
 
     onDelete() {
+        filepicker.setKey('A9LlxuvEwTomiX36nRj4Iz');
+
+        var url = this.content.url;
+        filepicker.remove(
+            url,
+            function(){
+                console.log("Removed");
+            }
+        );
         this._contentService.deleteContent(this.content)
             .subscribe(
                 data => console.log(data),

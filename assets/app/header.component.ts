@@ -8,10 +8,10 @@ import {AuthService} from "./auth/auth.service";
             <nav class="navbar navbar-inverse">
                 <div class="container">
                     <div class="navbar-header">
-                        <a class="navbar-brand" [routerLink]="['./']">Logo</a>
+                        <a class="navbar-brand" [routerLink]="['./home']">Logo</a>
                     </div>
                      <ul class="nav navbar-nav">
-                        <li><a [routerLink]="['./']">Home</a></li>
+                        <li><a [routerLink]="['./home']">Home</a></li>
                         <li><a [routerLink]="['./about/mission']">About Us</a></li>
                         <li><a [routerLink]="['./content']">Products</a></li>
                         <li><a [routerLink]="['./location']">Location</a></li>

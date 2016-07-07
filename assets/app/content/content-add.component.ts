@@ -20,18 +20,18 @@ import {ErrorService} from "../errors/error.service";
                         <input [ngFormControl]="myForm.find('price')" type="text" id="price" class="form-control">
                     </div>
                       <div class="row spacing">
-                      <div class="col-md-4">                        
+                        <div class="col-md-4">                        
                           <label for="picture">Picture</label>
                           <input type="file" id="store-input" (change)="changeListener($event)" />
                          
-                      </div>
-                      <div class="col-md-8">
+                        </div>
+                        <div class="col-md-8">
                          <div class="progress">
                             <div class="progress-bar progress-bar-striped active" role="progressbar" id="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
                              </div>
                           </div>
                         <img src="." alt="Preview" id="imgPlaceholder"/>
-                      </div>
+                        </div>
                       </div>
 
                     <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
@@ -75,7 +75,16 @@ export class ContentAddComponent implements OnInit {
   	changeListener($event): void {
     	filepicker.setKey('A9LlxuvEwTomiX36nRj4Iz');
 
-			var input = document.getElementById("store-input");		
+			var url = document.getElementById("imgPlaceholder").src;
+      if (url !== "http://localhost:3000/") {
+          filepicker.remove(
+              url,
+              function(){
+                console.log("Removed");
+              }
+          );
+      }
+      var input = document.getElementById("store-input");		
       filepicker.store(
     			input,
     			function(Blob){
@@ -99,7 +108,7 @@ export class ContentAddComponent implements OnInit {
 
     var imageUrl = document.getElementById("imgPlaceholder").src;
     console.log(imageUrl);   
-    if(imageUrl == ".") {
+    if(imageUrl == "http://localhost:3000/") {
       console.log("Choose a png to store to S3");
     }
     else {
