@@ -35,10 +35,6 @@ import {ErrorService} from "../errors/error.service";
           height: 50px;
           width: 70px;
         }
-
-        #content-add {
-          padding-top: 50px;
-        }
     `]
 })
 export class ContentListComponent implements OnInit {

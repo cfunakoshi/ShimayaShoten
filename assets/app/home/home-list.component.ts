@@ -29,7 +29,8 @@ import { ErrorService } from "../errors/error.service";
 				</div>
 		</div>
 		<div class="row">
-		<div class="jumbotron col-md-8 col-md-offset-2"  *ngIf="isLoggedIn()">
+		<div class="col-md-8 col-md-offset-2">
+    <div class="jumbotron"  *ngIf="isLoggedIn()">
           <h2 style="text-align: center;">Add/Change Picture</h2>
         <br>
             <div class="col-md-4">                        
@@ -46,6 +47,7 @@ import { ErrorService } from "../errors/error.service";
             <button class="btn btn-default" (click)="onSubmit()" *ngIf="isLoggedIn()">Upload</button>
        </div>
        </div>
+       </div>
 	`,
     styles: [`
     	.row {
@@ -57,83 +59,14 @@ import { ErrorService } from "../errors/error.service";
     	}
 
    		li {
-            float: none;
-            display: inline-block;
-        }
+        loat: none;
+        display: inline-block;
+      }
 
-        li img{
-            height: 80px;
-            width: 140px;
-        }
-
-        .css-carousel {
-      		width: 100%;
-      		height: 600px; /* Height of images */
-      		position: relative;
-      		overflow: hidden;
-    	}
-
-    	.css-carousel .css-img {
-      		max-width: 100%;
-      		height: 100%;
-      		position: absolute;
-      		top: 50%;
-      		left: 50%;;
-      		transform: translate(-50%, -50%);
-      		opacity: 0;
-            -webkit-animation: css-carousel-fade 25s linear infinite;
-            -moz-animation: css-carousel-fade 25s linear infinite;
-            -ms-animation: css-carousel-fade 25s linear infinite;
-      		animation: css-carousel-fade 25s linear infinite;
-    	}
-
-    	.css-carousel .css-img:nth-child(2) {
-            -webkit-animation-delay: 5s;
-            -moz-animation-delay: 5s;
-            -ms-animation-delay: 5s;
-            animation-delay: 5s;
-    	}
-
-    	.css-carousel .css-img:nth-child(3) {
-            -webkit-animation-delay: 10s;
-            -moz-animation-delay: 10s;
-            -ms-animation-delay: 10s;
-            animation-delay: 10s;
-    	}
-
-    	.css-carousel .css-img:nth-child(4) {
-            -webkit-animation-delay: 15s;
-            -moz-animation-delay: 15s;
-            -ms-animation-delay: 15s;
-            animation-delay: 15s;
-    	}
-
-    	.css-carousel .css-img:nth-child(5) {
-            -webkit-animation-delay: 20s;
-            -moz-animation-delay: 20s;
-            -ms-animation-delay: 20s;
-            animation-delay: 20s;
-    	}
-
-    	@-webkit-keyframes css-carousel-fade {
-        	0%, 20%, 100% { opacity: 0; }
-        	5%, 15% { opacity: 1;}
-    	}
-
-    	@-moz-keyframes css-carousel-fade {
-        	0%, 20%, 100% { opacity: 0; }
-        	5%, 15% { opacity: 1;}
-    	}
-
-    	@-ms-keyframes css-carousel-fade {
-        	0%, 20%, 100% { opacity: 0; }
-        	5%, 15% { opacity: 1;}
-    	}
-
-    	@keyframes css-carousel-fade {
-      		0%, 20%, 100% { opacity: 0; }
-      		5%, 15% { opacity: 1;}
-    	}
+      li img {
+        height: 80px;
+        width: 140px;
+      }
     `]
 })
 export class HomeListComponent implements OnInit {

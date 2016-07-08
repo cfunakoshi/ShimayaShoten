@@ -21,7 +21,7 @@ import { ErrorComponent } from "./errors/error.component";
 })
 @Routes([
     
-    {path: '/home', component: HomeListComponent},
+    {path: '/', component: HomeListComponent},
     {path: '/about', component: AboutComponent},
     {path: '/content', component: ContentListComponent},
     {path: '/location', component: LocationComponent},

@@ -8,7 +8,6 @@ var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
 var homeRoutes = require('./routes/home');
-var messageRoutes = require('./routes/messages');
 var contentRoutes = require('./routes/contents');
 var userRoutes = require('./routes/users');
 
@@ -20,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -34,7 +33,6 @@ app.use(function(req, res, next) {
 });
 
 app.use('/home', homeRoutes);
-app.use('/message', messageRoutes);
 app.use('/user', userRoutes);
 app.use('/content', contentRoutes);
 app.use('/', appRoutes);

@@ -49,10 +49,6 @@ import {ErrorService} from "../errors/error.service";
             padding-left: 20px;
         }
 
-        #store-input {
-          padding-top: 20px;
-        }
-
         img {
           height: 90px;
           width: 110px;

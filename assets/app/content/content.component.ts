@@ -14,32 +14,17 @@ import {ErrorService} from "../errors/error.service";
             </div>
         	<div class="panel-body">    		
                     <img src="{{content.url}}" alt="Image Not Available"/>
+                    <div id="price">
+                        <p style="font-style:italic;"> Price: $ {{ content.price }} </p>
+                        <button class="btn btn-danger" (click)="onDelete()" *ngIf="isLoggedIn()">Delete</button>
+                    </div> 
         	</div>
-        	<footer class="panel-footer">
-        		<div class="price">
-        			<p style="font-style:italic;"> Price: $ {{ content.price }} </p>
-                    <button class="btn btn-danger" (click)="onDelete()" *ngIf="isLoggedIn()">Delete</button>
-        		</div>               
-        	</footer>
         </article>
 	`,
     styles: [`
-        .panel-body {
-            height: 250px;
-            width: 300px;
-        }
-
-        .price {
-            display: inline-block;           
-            font-size: 12px;
-            width: 80%;
-            text-align: right;
-        }
-
         img {
             height: 100%;
             width: 100%;
-            border: 1px solid black;
             text-align: center;
         }
     `]
