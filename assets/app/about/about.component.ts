@@ -13,7 +13,7 @@ import { AboutHistoryComponent } from "./about-history.component";
                     <li><a [routerLink]="['./history']">History</a></li>
                 </ul>
         	</nav>
-        	<section class="col-md-7 col-md-offset-1" class="text-center">
+        	<section>
         		<router-outlet></router-outlet>
         	</section>
         </div>
@@ -22,20 +22,21 @@ import { AboutHistoryComponent } from "./about-history.component";
     styles: [`
         .col-md-3 {
             padding-top: 50px;
-        }
-
-        .router-link-active {
-            background-color: black;
-            color: white;
-        }
+        }       
         
         li a {
-            display: block;         
+            display: block;
+            color: #000084;         
         }
 
         li a:hover {
-            background-color: black;
-            color: white;        
+            background-color: #FFCC00;
+            color: #FF2400;        
+        }
+
+        .router-link-active {
+            background-color: #FFCC00;
+            color: white;
         }
     `]
 })

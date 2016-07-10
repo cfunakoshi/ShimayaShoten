@@ -8,14 +8,11 @@ import { ErrorService } from "../errors/error.service";
 @Component({
 	selector: 'my-home-list',
 	template: `
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1 ">
+    <div class="row">
 				<div class="css-carousel">
 					<img class="css-img" *ngFor="let pic of pics" src="{{pic.url}}" />
 				</div>
-			
-			</div>
-		</div>
+    </div>
 		<div class="row" *ngIf="isLoggedIn()">
 				<div class="col-md-8 col-md-offset-2 text-center">
 					<ul>
@@ -28,9 +25,9 @@ import { ErrorService } from "../errors/error.service";
 					</ul>
 				</div>
 		</div>
-		<div class="row">
+		<div class="row" *ngIf="isLoggedIn()">
 		<div class="col-md-8 col-md-offset-2">
-    <div class="jumbotron"  *ngIf="isLoggedIn()">
+    <div class="jumbotron">
           <h2 style="text-align: center;">Add/Change Picture</h2>
         <br>
             <div class="col-md-4">                        
@@ -44,7 +41,7 @@ import { ErrorService } from "../errors/error.service";
                  </div>
                  <img src="." alt="Preview" id="imgPlaceholder" style="height: 90px;width: 110px;"/>
             </div>
-            <button class="btn btn-default" (click)="onSubmit()" *ngIf="isLoggedIn()">Upload</button>
+            <button class="btn btn-primary" (click)="onSubmit()" *ngIf="isLoggedIn()">Upload</button>
        </div>
        </div>
        </div>

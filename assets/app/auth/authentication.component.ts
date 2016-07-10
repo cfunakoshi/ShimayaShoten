@@ -5,6 +5,7 @@ import { SignupComponent } from "./signup.component";
 import { SigninComponent } from "./signin.component";
 import { LogoutComponent } from "./logout.component";
 import { ProfileComponent } from "./profile.component";
+import { ContentAddComponent } from "../content/content-add.component";
 import { AuthService } from "./auth.service";
 @Component({
     selector: 'my-auth',
@@ -15,7 +16,8 @@ import { AuthService } from "./auth.service";
             </section>
             <nav class="col-md-3">               
                 <ul class="nav nav-pills nav-stacked" *ngIf="isLoggedIn()">
-                    <li><a [routerLink]="['./profile']" >Profile</a></li>                   
+                    <li><a [routerLink]="['./profile']" >Profile</a></li> 
+                    <li><a [routerLink]="['./add-product']" >Add Product</a></li>                   
                     <li><a [routerLink]="['./signup']" >Create New User</a></li>
                     <li><a [routerLink]="['./logout']" >Logout</a></li>
                 </ul>
@@ -40,23 +42,25 @@ import { AuthService } from "./auth.service";
         }
 
         .router-link-active {
-            background-color: black;
+            background-color: #FFCC00;
             color: white;
         }
         
         li a {
-            display: block;         
+            display: block;
+            color: #000084;           
         }
 
         li a:hover {
-            background-color: black;
-            color: white;        
+            background-color: #FFCC00;           
+            color: #FF2400;       
         }
     `]
 })
 @Routes([
     {path: '/signup', component: SignupComponent},
     {path: '/profile', component: ProfileComponent},
+    {path: '/add-product', component: ContentAddComponent},
     {path: '/logout', component: LogoutComponent}
 ])
 export class AuthenticationComponent {

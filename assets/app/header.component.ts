@@ -8,13 +8,12 @@ import {AuthService} from "./auth/auth.service";
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
-        <a class="navbar-brand" [routerLink]="['./']"><img src="/favicon.ico" alt="Shimaya Shoten Ltd.">
-        </a>
+                        <a class="navbar-brand" [routerLink]="['./']"><img src="/favicon.ico" alt="Shimaya Shoten Ltd."></a>
                     </div>
                      <ul class="nav navbar-nav">
                         <li><a [routerLink]="['./']">Home</a></li>
+                        <li><a [routerLink]="['./product']">Products</a></li>
                         <li><a [routerLink]="['./about/mission']">About Us</a></li>
-                        <li><a [routerLink]="['./content']">Products</a></li>
                         <li><a [routerLink]="['./location']">Location</a></li>
                      </ul>
                      <ul class="nav navbar-nav navbar-right">
@@ -27,6 +26,17 @@ import {AuthService} from "./auth/auth.service";
     `,
     directives: [ROUTER_DIRECTIVES],
     styles: [`
+        * {
+            -webkit-border-radius: 0 !important;
+            -moz-border-radius: 0 !important;
+            border-radius: 0 !important;
+        }
+
+        .nav >li >a {
+            padding-top: 23px;
+            padding-bottom: 23px;
+        }
+
         ul {
             text-align: center;
         }

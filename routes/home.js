@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
 			});
 		}
 		res.status(201).json({
-			message: 'Saved content',
+			message: 'Saved picture',
 			obj: result
 		});
 	});

@@ -7,8 +7,9 @@ import { HTTP_PROVIDERS } from "@angular/http";
 
 import { AppComponent } from "./app.component";
 import { HomeService } from "./home/home.service";
+import { CategoryService } from "./category/category.service";
 import { ContentService } from "./content/content.service";
 import { AuthService } from "./auth/auth.service";
 import { ErrorService } from "./errors/error.service";
 
-bootstrap(AppComponent, [HomeService, ContentService, AuthService, ErrorService, ROUTER_PROVIDERS, provide(LocationStrategy, {useClass: HashLocationStrategy}), HTTP_PROVIDERS]);
+bootstrap(AppComponent, [HomeService, CategoryService, ContentService, AuthService, ErrorService, ROUTER_PROVIDERS, provide(LocationStrategy, {useClass: HashLocationStrategy}), HTTP_PROVIDERS]);

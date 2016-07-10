@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
 var homeRoutes = require('./routes/home');
+var productRoutes = require('./routes/products');
 var contentRoutes = require('./routes/contents');
 var userRoutes = require('./routes/users');
 
@@ -34,6 +35,7 @@ app.use(function(req, res, next) {
 
 app.use('/home', homeRoutes);
 app.use('/user', userRoutes);
+app.use('/product', productRoutes);
 app.use('/content', contentRoutes);
 app.use('/', appRoutes);
 

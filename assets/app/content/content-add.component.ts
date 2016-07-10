@@ -1,9 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import { FormBuilder, ControlGroup, Validators, Control } from "@angular/common";
+import { Router } from "@angular/router";
 
-import {Content} from "./content";
-import {ContentService} from "./content.service";
-import {ErrorService} from "../errors/error.service";
+import { Content } from "./content";
+import { Category } from "../category/category";
+import { ContentService } from "./content.service";
+import { CategoryService } from "../category/category.service";
+import { ErrorService } from "../errors/error.service";
 @Component({
 	selector: 'my-content-add',
 	template:`
@@ -19,11 +22,18 @@ import {ErrorService} from "../errors/error.service";
                         <label for="price">Price</label>
                         <input [ngFormControl]="myForm.find('price')" type="text" id="price" class="form-control">
                     </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <input [ngFormControl]="myForm.find('category')" type="text" id="category" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input [ngFormControl]="myForm.find('description')" type="text" id="description" class="form-control">
+                    </div>
                       <div class="row spacing">
                         <div class="col-md-4">                        
                           <label for="picture">Picture</label>
-                          <input type="file" id="store-input" (change)="changeListener($event)" />
-                         
+                          <input type="file" id="store-input" (change)="changeListener($event)" />   
                         </div>
                         <div class="col-md-8">
                          <div class="progress">
@@ -59,12 +69,14 @@ export class ContentAddComponent implements OnInit {
 	
 	myForm: ControlGroup;
 
-  	constructor(private _contentService: ContentService, private _fb:FormBuilder, private _errorService: ErrorService) {}
+  	constructor(private _contentService: ContentService, private _categoryService: CategoryService, private _fb:FormBuilder, private _router: Router, private _errorService: ErrorService) {}
 
   	ngOnInit() {
     	this.myForm = this._fb.group({
             productName: ['', Validators.required],
-            price: ['', Validators.required]
+            price: ['', Validators.required],
+            category: ['', Validators.required],
+            description: ['', Validators.required]
         });
   	}
 
@@ -110,15 +122,17 @@ export class ContentAddComponent implements OnInit {
     else {
       var image = document.getElementById("imgPlaceholder");
       image.setAttribute('src', ".");
-      const content:Content = new Content(this.myForm.value.productName, this.myForm.value.price, null, imageUrl);
-            this._contentService.addContent(content)
-                .subscribe(
-                    data => {
-                        console.log(data);
-                        this._contentService.items.push(data);
-                    },
-                    error => this._errorService.handleError(error)
-                );
+      
+      const content:Content = new Content( this.myForm.value.productName, this.myForm.value.price, this.myForm.value.category, this.myForm.value.description, null, imageUrl );
+      this._contentService.addContent(content)
+        .subscribe(
+          data => {
+            console.log(data);
+            this._contentService.items.push(data);
+            this._router.navigateByUrl('/product');
+          },
+          error => this._errorService.handleError(error)
+        );
     }
   }
 }

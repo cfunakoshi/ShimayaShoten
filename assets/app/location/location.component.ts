@@ -5,7 +5,7 @@ import {Component, OnInit} from "@angular/core";
 		<div class="container-fluid">
   			<div class="row">
     			<div class="col-md-8 col-md-offset-2">
-              <h2><u>Location</u></h2>
+              <h2><u>Location</u>:</h2>
               <br><br>
       				<p><span class="glyphicon glyphicon-map-marker"></span> 710 Kohou St, Honolulu, HI 96817</p>
       				<p><span class="glyphicon glyphicon-phone"></span> (808)841-6611</p>

@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-var Content = require('../models/content');
+var Product = require('../models/product');
 
 router.get('/', function(req, res, next) {
-	Content.find()
+	Product.find()
 		.exec(function(err, docs) {
 			if (err) {
 				return res.status(404).json({
@@ -20,14 +20,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-	var content = new Content({
-		item: req.body.item,
-		price: req.body.price,
-		category: req.body.category,
-		description: req.body.description,
-		url: req.body.url
+	var category = new Product({
+		name: req.body.name
 	});
-	content.save(function(err, result) {
+	category.save(function(err, result) {
 		if(err) {
 			return res.status(404).json({
 				title: 'An error occurred',
@@ -35,14 +31,14 @@ router.post('/', function(req, res, next) {
 			});
 		}
 		res.status(201).json({
-			message: 'Saved content',
+			message: 'Saved category',
 			obj: result
 		});
 	});
 });
 
 router.delete('/:id', function(req, res, next) {
-    Content.findById(req.params.id, function(err, doc) {
+    Product.findById(req.params.id, function(err, doc) {
         if (err) {
             return res.status(404).json({
                 title: 'An error occurred',

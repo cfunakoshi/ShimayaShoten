@@ -1,47 +1,47 @@
 import {Component, OnInit} from "@angular/core";
+import { RouteSegment } from '@angular/router';
 
 import {Content} from "./content";
 import {ContentComponent} from "./content.component";
-import { ContentAddComponent } from "./content-add.component";
-import {ContentService} from "./content.service";
+import { ContentService } from "./content.service";
 import { AuthService } from "../auth/auth.service";
-import {ErrorService} from "../errors/error.service";
+import { ErrorService } from "../errors/error.service";
 @Component({
 	selector: 'my-content-list',
 	template: `
       <div class="container">
         <ul>
-			     <my-content *ngFor="let item of items" [content]="item" class="list-group"></my-content>
+          <template ngFor let-item="$implicit" [ngForOf]="items">
+             <li *ngIf="item.category == category"><my-content [content]="item"></my-content></li>
+          </template>
         </ul>
-        <section class="col-md-8 col-md-offset-2" *ngIf="isLoggedIn()">  
-          <div id="content-add">
-            <my-content-add></my-content-add>
-          </div>
-        </section>
       </div>
 	`, 
-	directives: [ContentComponent, ContentAddComponent],
+	directives: [ContentComponent],
 	styles: [`
         .container {
           padding-top: 30px;
         }
 
-        .list-group {
-            display: inline-block;
-            padding-left: 20px;
+        ul {
+          margin: 0;
+          padding-left: 0;
         }
         
-        img {
-          height: 50px;
-          width: 70px;
+        ul li{
+          width: 19.66%;
+          display: inline-block;
         }
     `]
 })
 export class ContentListComponent implements OnInit {
 
-  constructor(private _contentService: ContentService, private _authService: AuthService, private _errorService: ErrorService) {}
+  category: string;
+  items: Content[];
 
-	items: Content[];	
+  constructor(routeSegment: RouteSegment, private _contentService: ContentService, private _authService: AuthService, private _errorService: ErrorService) {
+    this.category = routeSegment.getParam('id');
+  }
 
 	ngOnInit() {
 		this._contentService.getContent()

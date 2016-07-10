@@ -4,7 +4,7 @@ import { Routes, ROUTER_DIRECTIVES } from "@angular/router";
 import { HomeListComponent } from "./home/home-list.component";
 import { AboutComponent } from "./about/about.component";
 import { LocationComponent } from "./location/location.component";
-import { ContentListComponent } from "./content/content-list.component";
+import { CategoryComponent } from "./category/category.component";
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { HeaderComponent } from "./header.component";
 import { ErrorComponent } from "./errors/error.component";
@@ -23,7 +23,7 @@ import { ErrorComponent } from "./errors/error.component";
     
     {path: '/', component: HomeListComponent},
     {path: '/about', component: AboutComponent},
-    {path: '/content', component: ContentListComponent},
+    {path: '/product', component: CategoryComponent},
     {path: '/location', component: LocationComponent},
     {path: '/auth', component: AuthenticationComponent}
 ])

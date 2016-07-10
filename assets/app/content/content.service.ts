@@ -18,7 +18,7 @@ export class ContentService {
 				const data = response.json().obj;
 				let objs: any[] = [];
 				for (let i = 0; i < data.length; i++) {
-					let item = new Content(data[i].item, data[i].price, data[i]._id, data[i].url);
+					let item = new Content(data[i].item, data[i].price, data[i].category, data[i].description, data[i]._id, data[i].url);
 					objs.push(item);
 				};
 				return objs;
@@ -32,7 +32,7 @@ export class ContentService {
 		return this._http.post('http://localhost:3000/content', body, {headers: headers})
 			.map(response => {
 				const data = response.json().obj;
-				let content = new Content(data.item, data.price, data._id, data.url);
+				let content = new Content(data.item, data.price, data.category, data.description, data._id, data.url);
 				return content;
 			}) 
 			.catch(error => Observable.throw(error.json()));
