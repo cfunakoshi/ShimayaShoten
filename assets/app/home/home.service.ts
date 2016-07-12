@@ -26,16 +26,25 @@ export class HomeService {
 			.catch(error => Observable.throw(error.json()));
 	}
 
-	addPic(pic: Home) {
-		const body = JSON.stringify(pic);
-		const headers = new Headers({'Content-type': 'application/json'});
-		return this._http.post('http://localhost:3000/home', body, {headers: headers})
-			.map(response => {
-				const data = response.json().obj;
-				let pic = new Home(data.url);
-				return pic;
-			}) 
-			.catch(error => Observable.throw(error.json()));
+	addPic( url: string, params: Array<string>, files: Array<File> ) {
+		return new Promise((resolve, reject) => {
+            var formData: any = new FormData();
+            var xhr = new XMLHttpRequest();
+            for(var i = 0; i < files.length; i++) {
+                formData.append("uploads[]", files[i], files[i].name);
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            }
+            xhr.open("POST", url, true);
+            xhr.send(formData);
+        });
 	}
 
 	deletePic(pic: Home) {

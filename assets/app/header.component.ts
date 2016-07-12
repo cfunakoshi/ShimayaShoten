@@ -4,7 +4,7 @@ import {AuthService} from "./auth/auth.service";
 @Component({
     selector: 'my-header',
     template: `
-        <header class="row">
+        <header>
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -14,7 +14,7 @@ import {AuthService} from "./auth/auth.service";
                         <li><a [routerLink]="['./']">Home</a></li>
                         <li><a [routerLink]="['./product']">Products</a></li>
                         <li><a [routerLink]="['./about/mission']">About Us</a></li>
-                        <li><a [routerLink]="['./location']">Location</a></li>
+                        <li><a [routerLink]="['./location']">Contact Us</a></li>
                      </ul>
                      <ul class="nav navbar-nav navbar-right">
                         <li><a [routerLink]="['./auth']" *ngIf="!isLoggedIn()"><span class="glyphicon glyphicon-log-in"></span> Admin Login</a></li>

@@ -7,17 +7,21 @@ import { LocationComponent } from "./location/location.component";
 import { CategoryComponent } from "./category/category.component";
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { HeaderComponent } from "./header.component";
+import { FooterComponent } from "./footer.component";
 import { ErrorComponent } from "./errors/error.component";
 @Component({
     selector: 'my-app',
     template: ` 
-        <div class="container">
+        <div id="wrapper">
             <my-header></my-header>
-            <router-outlet></router-outlet>
-        </div>
+            <div class="container">
+                <router-outlet></router-outlet>
+            </div>
+        </div>       
+            <my-footer></my-footer>
         <my-error></my-error>
     `,
-    directives: [ROUTER_DIRECTIVES, HeaderComponent, ErrorComponent]
+    directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent, ErrorComponent]
 })
 @Routes([
     

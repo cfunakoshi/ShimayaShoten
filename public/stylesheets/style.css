@@ -20,8 +20,13 @@ a.danger {
   color: red;
 }
 
+#wrapper {
+  min-height: 100%;
+  padding-bottom: 60px;
+}
+
 .container {
-  width: 100%;
+    width: 100%;
 }
 
 .spacing {
@@ -33,11 +38,11 @@ a.danger {
 }
 
 .navbar {
-  background-color: #FFCC00; 
-  border-color: #FFCC00; 
+  background-color: #FFCC00;
+  border-color: #FFCC00;
   -webkit-box-shadow: 0 8px 6px -6px #999;
   -moz-box-shadow: 0 8px 6px -6px #999;
-  box-shadow: 0 8px 6px -6px #999;    
+  box-shadow: 0 8px 6px -6px #999;
 }
 
 .navbar-brand {
@@ -49,6 +54,16 @@ a.danger {
   height: 100%;
   padding: 7px 15px;
   width: auto;
+}
+
+footer {
+  bottom: 0;
+  height: 60px;
+  background-color: #FFCC00;
+  border-color: #FFCC00;
+  -webkit-box-shadow: 0 -8px 6px -6px #999;
+  -moz-box-shadow: 0 -8px 6px -6px #999;
+  box-shadow: 0 -8px 6px -6px #999; 
 }
 
 .panel {
@@ -70,10 +85,22 @@ a.danger {
   padding-top: 50px;
 }
 
+#upload-button {
+  padding-top: 20px;
+}
+
+.upload-form {
+  width: 100%;
+}
+
 .description {           
   font-size: 14px;
   text-align: left;
   padding-top: 50px;
+}
+
+.content-description {
+    padding-top: 20px;
 }
 
 .price {
@@ -82,6 +109,14 @@ a.danger {
   width: 80%;
   text-align: right;
   padding-top: 20px;
+}
+
+.content-price {
+  font-size: 14px;
+  width: 100%;
+  text-align: right;
+  padding-top: 20px;
+  font-style: italic;
 }
 
 .css-carousel {

@@ -9,10 +9,10 @@ import {ErrorService} from "../errors/error.service";
 	template: `
         <article class="panel panel-default">
         	<div class="panel-body">    		
-                    <a (click)="openItem()"><img src="{{content.url}}" alt="Image Not Available"/></a>
+                    <a (click)="openItem()"><img src="./images/{{content.url}}" alt="Image Not Available"/></a>
         	</div>
             <div class="title text-center">
-                <h4>{{ content.item }}</h4>
+                <a (click)="openItem()"><h4>{{ content.item }}</h4></a>
             </div>
             <div class="price">                        
                         <button class="btn btn-danger" (click)="onDelete()" *ngIf="isLoggedIn()">Delete</button>
@@ -24,17 +24,17 @@ import {ErrorService} from "../errors/error.service";
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" aria-label="Close" (click)="onClose()"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">{{content.item}}</h4>
+                        <h4 class="modal-title"><b>{{content.item}}</b></h4>
                     </div>
                     <div class="modal-body">
                         <div class="content-image">
-                            <img src="{{content.url}}" alt="Image Not Available"/>
+                            <img src="./images/{{content.url}}" alt="Image Not Available"/>
                         </div>
                         <div class="content-description">
                             <p>{{content.description}}</p>
                         </div>
-                        <div class="price">
-                            <p style="font-style: italic;"> Price: $ {{ content.price }} </p>
+                        <div class="content-price">
+                            <p> Price: $ {{ content.price }} </p>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -45,6 +45,14 @@ import {ErrorService} from "../errors/error.service";
         </div><!-- /.modal --> 
 	`,
     styles: [`
+        .title a {
+            color: black;
+        } 
+
+        .title a:hover {
+            color: #FF2400;
+        } 
+
         img {
             height: 100%;
             width: 100%;
@@ -77,20 +85,11 @@ export class ContentComponent {
     }
 
     onDelete() {
-        filepicker.setKey('A9LlxuvEwTomiX36nRj4Iz');
-
-        var url = this.content.url;
-        filepicker.remove(
-            url,
-            function(){
-                console.log("Removed");
-            }
-        );
         this._contentService.deleteContent(this.content)
-            .subscribe(
-                data => console.log(data),
-                error => this._errorService.handleError(error)
-            );
+        .subscribe(
+            data => console.log(data),
+            error => this._errorService.handleError(error)
+        );
     }
 
     isLoggedIn() {

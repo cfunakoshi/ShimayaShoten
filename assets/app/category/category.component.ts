@@ -21,7 +21,7 @@ import {ErrorService} from "../errors/error.service";
                     </li>
                 </ul>
           </nav>
-          <div class="col-md-2" *ngIf="isLoggedIn()">
+          <div class="col-md-1 col-md-offset-1" *ngIf="isLoggedIn()">
             <span class="glyphicon glyphicon-arrow-left"></span>
           </div>
         <div class="col-md-3" *ngIf="isLoggedIn()">

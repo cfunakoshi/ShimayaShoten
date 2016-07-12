@@ -1,5 +1,20 @@
 var express = require('express');
 var router = express.Router();
+var fs = require("fs");
+var multer = require("multer");
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/images/')
+  },
+  filename: function (req, file, cb) {
+    var fileExtension = file.originalname.split(".")[1];
+    var filename = Date.now() + "." + fileExtension;
+    cb(null, filename );
+  }
+});
+
+var upload = multer({storage: storage});
 
 var Content = require('../models/content');
 
@@ -39,6 +54,10 @@ router.post('/', function(req, res, next) {
 			obj: result
 		});
 	});
+});
+
+router.post('/upload', upload.array("uploads[]", 12), function(req, res, next) {
+	res.send(req.files[0]);
 });
 
 router.delete('/:id', function(req, res, next) {

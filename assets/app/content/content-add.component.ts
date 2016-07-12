@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
 import { FormBuilder, ControlGroup, Validators, Control } from "@angular/common";
-import { Router } from "@angular/router";
 
 import { Content } from "./content";
 import { Category } from "../category/category";
@@ -28,20 +27,11 @@ import { ErrorService } from "../errors/error.service";
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input [ngFormControl]="myForm.find('description')" type="text" id="description" class="form-control">
+                        <textarea [ngFormControl]="myForm.find('description')" rows="3" id="description" class="form-control"></textarea>
                     </div>
-                      <div class="row spacing">
-                        <div class="col-md-4">                        
+                      <div class="row spacing">                       
                           <label for="picture">Picture</label>
-                          <input type="file" id="store-input" (change)="changeListener($event)" />   
-                        </div>
-                        <div class="col-md-8">
-                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped active" role="progressbar" id="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                             </div>
-                          </div>
-                        <img src="." alt="Preview" id="imgPlaceholder"/>
-                        </div>
+                          <input type="file" id="store-input" (change)="fileChangeEvent($event)" />   
                       </div>
 
                     <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
@@ -54,9 +44,8 @@ import { ErrorService } from "../errors/error.service";
           
         }
 
-        .list-group {
-            display: inline-block;
-            padding-left: 20px;
+        .row {
+          padding-left: 16px;
         }
 
         img {
@@ -68,8 +57,9 @@ import { ErrorService } from "../errors/error.service";
 export class ContentAddComponent implements OnInit {
 	
 	myForm: ControlGroup;
+  filesToUpload: File[];
 
-  	constructor(private _contentService: ContentService, private _categoryService: CategoryService, private _fb:FormBuilder, private _router: Router, private _errorService: ErrorService) {}
+  	constructor(private _contentService: ContentService, private _categoryService: CategoryService, private _fb:FormBuilder, private _errorService: ErrorService) {}
 
   	ngOnInit() {
     	this.myForm = this._fb.group({
@@ -80,59 +70,26 @@ export class ContentAddComponent implements OnInit {
         });
   	}
 
-  	changeListener($event): void {
-    	filepicker.setKey('A9LlxuvEwTomiX36nRj4Iz');
-
-			var url = document.getElementById("imgPlaceholder").src;
-      if (url !== "http://localhost:3000/") {
-          filepicker.remove(
-              url,
-              function(){
-                console.log("Removed");
-              }
-          );
-      }
-      var input = document.getElementById("store-input");		
-      filepicker.store(
-    			input,
-    			function(Blob){
-    				var image = document.getElementById("imgPlaceholder");
-      				console.log("Store successful:", JSON.stringify(Blob));
-      				image.setAttribute('src', Blob.url);
-    			},
-    			function(FPError) {
-  					//  console.log(FPError.toString()); - print errors to console
-    			},
-    			function(progress) {
-              var progressbar = document.getElementById("progressbar");
-              progressbar.style.width = progress+'%';
-      				console.log("Loading: "+progress+"%");
-    			}
-  		);
+  	fileChangeEvent(fileInput: any) {
+    	this.filesToUpload = <Array<File>> fileInput.target.files;
 	  }
 
 	onSubmit() {
-    filepicker.setKey('A9LlxuvEwTomiX36nRj4Iz');
-
-    var imageUrl = document.getElementById("imgPlaceholder").src;
-    console.log(imageUrl);   
-    if(imageUrl == "http://localhost:3000/") {
-      console.log("Choose a png to store to S3");
-    }
-    else {
-      var image = document.getElementById("imgPlaceholder");
-      image.setAttribute('src', ".");
-      
-      const content:Content = new Content( this.myForm.value.productName, this.myForm.value.price, this.myForm.value.category, this.myForm.value.description, null, imageUrl );
-      this._contentService.addContent(content)
-        .subscribe(
-          data => {
-            console.log(data);
-            this._contentService.items.push(data);
-            this._router.navigateByUrl('/product');
-          },
-          error => this._errorService.handleError(error)
-        );
-    }
+      this._contentService.makeFileRequest("http://localhost:3000/content/upload", [], this.filesToUpload).then((result) => {
+            console.log(result);
+            
+            const content:Content = new Content( this.myForm.value.productName, this.myForm.value.price, this.myForm.value.category, this.myForm.value.description, null, result.filename );
+            this._contentService.addContent(content)
+              .subscribe(
+                data => {
+                  console.log(data);
+                  this._contentService.items.push(data);
+                  alert("Product was added!");
+                },
+                error => this._errorService.handleError(error)
+              );
+            }, (error) => {
+            console.error(error);
+      });
   }
 }

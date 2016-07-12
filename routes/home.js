@@ -1,5 +1,20 @@
 var express = require('express');
 var router = express.Router();
+var fs = require("fs");
+var multer = require("multer");
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/images/')
+  },
+  filename: function (req, file, cb) {
+    var fileExtension = file.originalname.split(".")[1];
+    var filename = Date.now() + "." + fileExtension;
+    cb(null, filename );
+  }
+});
+
+var upload = multer({storage: storage});
 
 var Home = require('../models/home');
 
@@ -19,18 +34,18 @@ router.get('/', function(req, res, next) {
 		});
 });
 
-router.post('/', function(req, res, next) {
-	var picture = new Home({
-		url: req.body.url
+router.post('/', upload.array("uploads[]", 12), function(req, res, next) {
+	var pic = new Home({
+		url: req.files[0].filename
 	});
-	picture.save(function(err, result) {
+	pic.save(function(err, result) {
 		if(err) {
 			return res.status(404).json({
 				title: 'An error occurred',
 				error: err
 			});
 		}
-		res.status(201).json({
+		res.status(200).json({
 			message: 'Saved picture',
 			obj: result
 		});
